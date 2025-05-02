@@ -1,73 +1,122 @@
-# Welcome to your Lovable project
+# Credito Colombiano Evaluator
 
-## Project info
+Sistema integral para la evaluación y calificación crediticia, compuesto por un backend (API RESTful con Node.js/Express/MongoDB) y un frontend (React + Vite + Tailwind CSS). Permite a instituciones financieras automatizar el análisis de riesgo y la gestión de solicitudes de crédito.
 
-**URL**: https://lovable.dev/projects/8c35cb37-0631-4e27-a0d2-632015ea4845
+---
 
-## How can I edit this code?
+## Características principales
 
-There are several ways of editing your application.
+- **Evaluación crediticia automática**: Algoritmo de scoring adaptable a diferentes perfiles.
+- **API RESTful**: Backend robusto y seguro, autenticación JWT.
+- **Dashboard web**: Interfaz moderna para gestión de clientes y evaluaciones.
+- **Persistencia NoSQL**: MongoDB para almacenamiento flexible.
+- **Reportes y analítica**: Visualización de estadísticas y tendencias.
+- **Testing**: Pruebas unitarias con Jest.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8c35cb37-0631-4e27-a0d2-632015ea4845) and start prompting.
+## Tecnologías
 
-Changes made via Lovable will be committed automatically to this repo.
+### Backend
+- Node.js
+- Express
+- MongoDB + Mongoose
+- JWT (autenticación)
+- Jest (testing)
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
+### Frontend
+- React
 - Vite
 - TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- shadcn-ui
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/8c35cb37-0631-4e27-a0d2-632015ea4845) and click on Share -> Publish.
+## Instalación y ejecución
 
-## Can I connect a custom domain to my Lovable project?
+### 1. Clonar el repositorio
 
-Yes, you can!
+```bash
+git clone https://github.com/[usuario]/credito-colombiano-evaluator.git
+cd credito-colombiano-evaluator
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### 2. Configuración del backend
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```bash
+cd backend
+npm install
+cp .env.example .env
+# Edita el archivo .env con tu configuración local (ejemplo: URI de MongoDB, JWT_SECRET, etc.)
+npm run dev
+```
+El backend estará disponible por defecto en `http://localhost:3001`.
+
+### 3. Configuración del frontend
+
+En otra terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+El frontend estará disponible por defecto en `http://localhost:5173`.
+
+---
+
+## Estructura del proyecto
+
+```
+/backend
+  /src
+    /config         # Configuración de la app y base de datos
+    /controllers    # Lógica de controladores de la API
+    /middleware     # Middlewares (autenticación, errores, etc.)
+    /models         # Modelos de datos (Mongoose)
+    /routes         # Definición de rutas de la API
+    /services       # Lógica de negocio y helpers
+    /tests          # Pruebas unitarias
+  .env.example      # Variables de entorno de ejemplo
+  package.json
+
+/frontend
+  /src
+    /components     # Componentes reutilizables de React
+    /pages          # Vistas principales
+    /services       # Lógica de conexión con la API
+    /hooks          # Custom hooks
+    /utils          # Utilidades
+    /assets         # Recursos estáticos
+  tailwind.config.js
+  vite.config.ts
+  package.json
+
+README.md
+```
+
+---
+
+## Documentación de la API
+
+La documentación Swagger está disponible en `http://localhost:3001/api-docs` cuando el backend está en ejecución.
+
+---
+
+## Pruebas
+
+### Backend
+
+```bash
+cd backend
+npm test
+```
+
+---
+
+## Licencia
+
+MIT
+
+---
