@@ -1,4 +1,4 @@
-# Credito Colombiano Evaluator
+# Evaluador de score de Crédito Colombiano - CreditScoreAPI
 
 Sistema integral para la evaluación y calificación crediticia, compuesto por un backend (API RESTful con Node.js/Express/MongoDB) y un frontend (React + Vite + Tailwind CSS). Permite a instituciones financieras automatizar el análisis de riesgo y la gestión de solicitudes de crédito.
 
