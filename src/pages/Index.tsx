@@ -31,6 +31,7 @@ import {
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SCORE_MIN = 150;
 const SCORE_MAX = 950;
@@ -107,13 +108,26 @@ const Index = () => {
       const score = calculateCreditScore(formData, payment);
       const adjustments = calculateAdjustments(formData, payment);
 
+      const income = Number(formData.monthlyIncome);
+      const expenses = Number(formData.monthlyExpenses);
+      const paymentCapacity = income - expenses;
+
+      // Nueva lógica de decisión
+      let decision = "APROBADO";
+      if (score < SCORE_MIN && paymentCapacity < payment) {
+        decision = "RECHAZADO";
+      } else if (score < SCORE_MIN || paymentCapacity < payment) {
+        decision = "APROBADO_CON_AJUSTE";
+      } else if (score > 700) {
+        decision = "APROBADO";
+      } else if (score > 500 && adjustments.canApproveWithAdjustments) {
+        decision = "APROBADO_CON_AJUSTE";
+      } else {
+        decision = "RECHAZADO";
+      }
+
       const evaluation = {
-        decision:
-          score > 700
-            ? "APROBADO"
-            : score > 500 && adjustments.canApproveWithAdjustments
-            ? "APROBADO_CON_AJUSTE"
-            : "RECHAZADO",
+        decision,
         score: score,
         percentile: Math.round((score / SCORE_MAX) * 100),
         factors: getDecisionFactors(score, formData, payment),
@@ -151,31 +165,31 @@ const Index = () => {
         loanAmount: Number(formData.loanAmount),
         loanTerm: Number(formData.loanTerm),
         interestRate: Number(formData.interestRate),
-        purpose: formData.purpose
+        purpose: formData.purpose,
       };
 
       // Guardar la evaluación y el cliente en el backend
       try {
-        const response = await fetch('http://localhost:3001/api/evaluaciones', {
-          method: 'POST',
+        const response = await fetch("http://localhost:3001/api/evaluaciones", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             clientData,
-            evaluationData: evaluation
+            evaluationData: evaluation,
           }),
         });
 
         if (!response.ok) {
-          throw new Error('Error al guardar la evaluación');
+          throw new Error("Error al guardar la evaluación");
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         toast({
-          title: '❌ Error',
-          description: 'No se pudo guardar la evaluación en el sistema',
-          variant: 'destructive',
+          title: "❌ Error",
+          description: "No se pudo guardar la evaluación en el sistema",
+          variant: "destructive",
         });
       }
 
@@ -1129,6 +1143,41 @@ const Index = () => {
           </Card>
         )}
       </div>
+      {/* Footer fijo en una sola línea, contenido a la izquierda y enlaces a la derecha */}
+      <footer className="fixed bottom-0 left-0 w-full bg-white/90 border-t border-gray-200 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-xs text-gray-500">
+          <div>
+            © 2024 CreditScore Pro &nbsp;•&nbsp; Desarrollado por{" "}
+            <a
+              href="https://www.igdsas.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-indigo-700"
+            >
+              Ingeniería, Gestión y Desarrollo S. A. S.
+            </a>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Link to="/privacy" className="underline hover:text-indigo-700">
+              Política de Privacidad
+            </Link>
+            <span>|</span>
+            <Link
+              to="/terms"
+              className="underline hover:text-indigo-700"
+            >
+              Términos de Uso
+            </Link>
+            <span>|</span>
+            <a
+              href="#"
+              className="underline hover:text-indigo-700"
+            >
+              Contacto
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

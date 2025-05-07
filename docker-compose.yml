@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: backend
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      MONGODB_URI: mongodb://root:example@mongo:27017/credito?authSource=admin
+      JWT_SECRET: supersecret
+      # Agrega aquí otras variables de entorno necesarias
+    depends_on:
+      - mongo
+
+volumes:
+  mongo-data:
