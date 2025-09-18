@@ -9,7 +9,7 @@ const evaluacionSchema = new mongoose.Schema({
     decision: {
         type: String,
         required: true,
-        enum: ['APROBADO', 'APROBADO_CON_AJUSTE', 'RECHAZADO']
+        enum: ['APROBADO', 'APROBADO_CON_AJUSTE', 'RECHAZADO', 'EN_OBSERVACION']
     },
     score: {
         type: Number,

@@ -227,7 +227,7 @@ const Privacy = () => {
           <Button
             variant="outline"
             className="text-indigo-700 border-indigo-300 hover:bg-indigo-50"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/scoring")}
           >
             Volver al inicio
           </Button>

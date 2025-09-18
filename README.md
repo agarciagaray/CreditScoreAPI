@@ -11,7 +11,6 @@ Sistema integral para la evaluación y calificación crediticia, compuesto por u
 - **Dashboard web**: Interfaz moderna para gestión de clientes y evaluaciones.
 - **Persistencia NoSQL**: MongoDB para almacenamiento flexible.
 - **Reportes y analítica**: Visualización de estadísticas y tendencias.
-- **Testing**: Pruebas unitarias con Jest.
 
 ---
 
@@ -22,7 +21,6 @@ Sistema integral para la evaluación y calificación crediticia, compuesto por u
 - Express
 - MongoDB + Mongoose
 - JWT (autenticación)
-- Jest (testing)
 
 ### Frontend
 - React
@@ -55,10 +53,10 @@ El backend estará disponible por defecto en `http://localhost:3001`.
 
 ### 3. Configuración del frontend
 
-En otra terminal:
+En otra terminal, desde la raíz del proyecto:
 
 ```bash
-cd frontend
+# El frontend se encuentra en la raíz del proyecto
 npm install
 npm run dev
 ```
@@ -69,31 +67,21 @@ El frontend estará disponible por defecto en `http://localhost:5173`.
 ## Estructura del proyecto
 
 ```
-/backend
+/               # Raíz del proyecto (Contiene el frontend)
   /src
-    /config         # Configuración de la app y base de datos
-    /controllers    # Lógica de controladores de la API
-    /middleware     # Middlewares (autenticación, errores, etc.)
-    /models         # Modelos de datos (Mongoose)
-    /routes         # Definición de rutas de la API
-    /services       # Lógica de negocio y helpers
-    /tests          # Pruebas unitarias
-  .env.example      # Variables de entorno de ejemplo
-  package.json
-
-/frontend
-  /src
-    /components     # Componentes reutilizables de React
-    /pages          # Vistas principales
-    /services       # Lógica de conexión con la API
-    /hooks          # Custom hooks
-    /utils          # Utilidades
-    /assets         # Recursos estáticos
-  tailwind.config.js
+    /components # Componentes reutilizables de React
+    /pages      # Vistas principales
+    ...
+  /public
+  /backend
+    /src
+      /controllers
+      /models
+      ...
+    package.json
+  package.json      # package.json del frontend
   vite.config.ts
-  package.json
-
-README.md
+  README.md
 ```
 
 ---
@@ -101,17 +89,6 @@ README.md
 ## Documentación de la API
 
 La documentación Swagger está disponible en `http://localhost:3001/api-docs` cuando el backend está en ejecución.
-
----
-
-## Pruebas
-
-### Backend
-
-```bash
-cd backend
-npm test
-```
 
 ---
 
