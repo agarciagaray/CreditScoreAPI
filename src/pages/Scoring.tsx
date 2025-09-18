@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/components/ui/use-toast";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import {
@@ -529,38 +530,38 @@ const Scoring = () => {
     switch (decision) {
       case "APROBADO":
         return {
-          bgColor: "bg-green-50",
-          borderColor: "border-green-200",
-          textColor: "text-green-800",
-          icon: <Check className="h-6 w-6 text-green-600" />,
+          bgColor: "bg-green-50 dark:bg-green-950/20",
+          borderColor: "border-green-200 dark:border-green-800",
+          textColor: "text-green-800 dark:text-green-200",
+          icon: <Check className="h-6 w-6 text-green-600 dark:text-green-400" />,
           title: "Solicitud Aprobada",
           description: "¡Felicitaciones! Su crédito ha sido aprobado.",
         };
       case "APROBADO_CON_AJUSTE":
         return {
-          bgColor: "bg-amber-50",
-          borderColor: "border-amber-200",
-          textColor: "text-amber-800",
-          icon: <Info className="h-6 w-6 text-amber-600" />,
+          bgColor: "bg-amber-50 dark:bg-amber-950/20",
+          borderColor: "border-amber-200 dark:border-amber-800",
+          textColor: "text-amber-800 dark:text-amber-200",
+          icon: <Info className="h-6 w-6 text-amber-600 dark:text-amber-400" />,
           title: "Solicitud Aprobada con Ajustes",
           description:
             "Su crédito ha sido aprobado con modificaciones en el monto o plazo.",
         };
       case "RECHAZADO":
         return {
-          bgColor: "bg-red-50",
-          borderColor: "border-red-200",
-          textColor: "text-red-800",
-          icon: <X className="h-6 w-6 text-red-600" />,
+          bgColor: "bg-red-50 dark:bg-red-950/20",
+          borderColor: "border-red-200 dark:border-red-800",
+          textColor: "text-red-800 dark:text-red-200",
+          icon: <X className="h-6 w-6 text-red-600 dark:text-red-400" />,
           title: "Solicitud Rechazada",
           description:
             "Lo sentimos, su solicitud de crédito no ha sido aprobada.",
         };
       default:
         return {
-          bgColor: "bg-gray-50",
-          borderColor: "border-gray-200",
-          textColor: "text-gray-800",
+          bgColor: "bg-muted",
+          borderColor: "border-border",
+          textColor: "text-foreground",
           icon: null,
           title: "",
           description: "",
@@ -569,9 +570,9 @@ const Scoring = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-blue-50 py-10 px-2 sm:px-6 lg:px-8 transition-all duration-500">
+    <div className="min-h-screen bg-background py-10 px-2 sm:px-6 lg:px-8 transition-all duration-500">
       <div className="max-w-4xl mx-auto">
-        <div className="w-full flex justify-end mb-4">
+        <div className="w-full flex justify-between items-center mb-4">
           <Button
             variant="outline"
             size="sm"
@@ -581,24 +582,27 @@ const Scoring = () => {
             <Home className="h-4 w-4" />
             Ir al inicio
           </Button>
+          <ThemeToggle />
         </div>
-        <h1 className="text-4xl font-extrabold text-center text-indigo-900 mb-2 tracking-tight drop-shadow-sm">
-          <span className="inline-flex items-center gap-2">
-            <Check className="h-8 w-8 text-indigo-500" />
-            CreditScore Pro
-          </span>
-        </h1>
-        <p className="text-center text-gray-600 mb-10 text-lg">
-          Evalúe la elegibilidad crediticia en segundos
-        </p>
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-extrabold mb-2 tracking-tight">
+            <span className="inline-flex items-center gap-2">
+              <Check className="h-8 w-8 text-primary" />
+              CreditScore Pro
+            </span>
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Evalúe la elegibilidad crediticia en segundos
+          </p>
+        </div>
 
-        <Card className="mb-10 shadow-xl border-0 bg-white/80 backdrop-blur-md rounded-2xl">
-          <CardHeader className="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-t-2xl">
-            <CardTitle className="text-indigo-800 flex items-center gap-2">
-              <FileText className="h-5 w-5 text-indigo-400" />
+        <Card className="mb-10">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5 text-primary" />
               Formulario de Solicitud
             </CardTitle>
-            <CardDescription className="text-indigo-600">
+            <CardDescription>
               Ingresa los datos personales y crediticios para evaluar la
               solicitud
             </CardDescription>
@@ -608,8 +612,8 @@ const Scoring = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* --- DATOS PERSONALES --- */}
                 <div className="col-span-2">
-                  <h2 className="text-lg font-semibold text-indigo-700 mb-4 border-b border-indigo-200 pb-2 flex items-center gap-2">
-                    <User className="h-5 w-5 text-indigo-400" />
+                  <h2 className="text-lg font-semibold mb-4 border-b pb-2 flex items-center gap-2">
+                    <User className="h-5 w-5 text-primary" />
                     Datos Personales
                   </h2>
                 </div>
@@ -685,8 +689,8 @@ const Scoring = () => {
                 </div>
                 {/* --- INFORMACIÓN FINANCIERA --- */}
                 <div className="col-span-2">
-                  <h2 className="text-lg font-semibold text-indigo-700 mb-4 mt-4 border-b border-indigo-200 pb-2 flex items-center gap-2">
-                    <TrendingUp className="h-5 w-5 text-indigo-400" />
+                  <h2 className="text-lg font-semibold mb-4 mt-4 border-b pb-2 flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-primary" />
                     Información Financiera
                   </h2>
                 </div>
@@ -821,8 +825,8 @@ const Scoring = () => {
                 </div>
                 {/* --- HISTORIAL CREDITICIO --- */}
                 <div className="col-span-2">
-                  <h2 className="text-lg font-semibold text-indigo-700 mb-4 mt-4 border-b border-indigo-200 pb-2 flex items-center gap-2">
-                    <CreditCard className="h-5 w-5 text-indigo-400" />
+                  <h2 className="text-lg font-semibold mb-4 mt-4 border-b pb-2 flex items-center gap-2">
+                    <CreditCard className="h-5 w-5 text-primary" />
                     Historial Crediticio
                   </h2>
                 </div>
@@ -990,8 +994,8 @@ const Scoring = () => {
 
                 {/* --- CRÉDITO SOLICITADO --- */}
                 <div className="col-span-2">
-                  <h2 className="text-lg font-semibold text-indigo-700 mb-4 mt-4 border-b border-indigo-200 pb-2 flex items-center gap-2">
-                    <Home className="h-5 w-5 text-indigo-400" />
+                  <h2 className="text-lg font-semibold mb-4 mt-4 border-b pb-2 flex items-center gap-2">
+                    <Home className="h-5 w-5 text-primary" />
                     Crédito Solicitado
                   </h2>
                 </div>
@@ -1069,8 +1073,9 @@ const Scoring = () => {
               <div className="mt-8">
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 rounded-xl shadow-lg transition-all duration-300"
+                  className="w-full font-bold py-3 transition-all duration-300"
                   disabled={loading}
+                  size="lg"
                 >
                   {loading ? (
                     <div className="flex items-center justify-center">
@@ -1088,7 +1093,7 @@ const Scoring = () => {
 
         {result && (
           <Card
-            className="shadow-2xl border-0 rounded-2xl bg-white/90 backdrop-blur-md transition-all duration-300 animate-fade-in mt-8"
+            className="transition-all duration-300 animate-fade-in mt-8"
             id="resultado-evaluacion"
           >
             <CardHeader
@@ -1096,7 +1101,7 @@ const Scoring = () => {
                 getDecisionStyles(result.decision).bgColor
               } border-b-2 ${
                 getDecisionStyles(result.decision).borderColor
-              } rounded-t-2xl`}
+              }`}
             >
               <div className="flex items-center space-x-3">
                 {getDecisionStyles(result.decision).icon}
@@ -1120,23 +1125,23 @@ const Scoring = () => {
             </CardHeader>
             <CardContent className="pt-6">
               <div className="space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-gray-50 p-4 rounded-lg">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between bg-muted p-4 rounded-lg">
                   <div>
-                    <h3 className="font-medium text-gray-700">
+                    <h3 className="font-medium text-foreground">
                       Puntaje crediticio
                     </h3>
                     <div className="flex items-end">
-                      <p className="text-3xl font-bold text-indigo-700">
+                      <p className="text-3xl font-bold text-primary">
                         {result.score}
                       </p>
-                      <p className="text-gray-500 ml-1 mb-1">/ {SCORE_MAX}</p>
+                      <p className="text-muted-foreground ml-1 mb-1">/ {SCORE_MAX}</p>
                     </div>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-muted-foreground">
                       {getScoreRiskLevel(result.score).label}
                     </span>
                   </div>
                   <div className="mt-2 sm:mt-0 w-full sm:w-1/3">
-                    <div className="h-3 w-full bg-gray-200 rounded-full overflow-hidden shadow-inner">
+                    <div className="h-3 w-full bg-secondary rounded-full overflow-hidden shadow-inner">
                       <div
                         className={`h-full rounded-full transition-all duration-700 bg-gradient-to-r ${
                           getScoreRiskLevel(result.score).color
@@ -1144,7 +1149,7 @@ const Scoring = () => {
                         style={{ width: `${result.percentile}%` }}
                       ></div>
                     </div>
-                    <p className="text-sm text-right text-gray-500 mt-1">
+                    <p className="text-sm text-right text-muted-foreground mt-1">
                       Percentil {result.percentile}%
                     </p>
                   </div>
@@ -1196,27 +1201,27 @@ const Scoring = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border rounded-lg p-4">
                   <div>
-                    <h3 className="font-medium text-gray-700 mb-1">
+                    <h3 className="font-medium text-foreground mb-1">
                       Cuota mensual calculada
                     </h3>
-                    <p className="text-2xl font-semibold text-indigo-700">
+                    <p className="text-2xl font-semibold text-primary">
                       ${result.monthlyPayment.toLocaleString("es-CO")}{" "}
-                      <span className="text-sm text-gray-500">COP</span>
+                      <span className="text-sm text-muted-foreground">COP</span>
                     </p>
                   </div>
                   {Number(formData.monthlyIncome) &&
                     Number(formData.monthlyExpenses) && (
                       <div>
-                        <h3 className="font-medium text-gray-700 mb-1">
+                        <h3 className="font-medium text-foreground mb-1">
                           Capacidad de pago mensual
                         </h3>
-                        <p className="text-2xl font-semibold text-indigo-700">
+                        <p className="text-2xl font-semibold text-primary">
                           $
                           {(
                             Number(formData.monthlyIncome) -
                             Number(formData.monthlyExpenses)
                           ).toLocaleString("es-CO")}{" "}
-                          <span className="text-sm text-gray-500">COP</span>
+                          <span className="text-sm text-muted-foreground">COP</span>
                         </p>
                       </div>
                     )}
@@ -1225,35 +1230,35 @@ const Scoring = () => {
                   <div
                     className={`grid grid-cols-1 sm:grid-cols-2 gap-6 p-5 rounded-lg ${
                       result.decision === "APROBADO_CON_AJUSTE"
-                        ? "bg-amber-50 border border-amber-200"
-                        : "bg-green-50 border border-green-200"
+                        ? "bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800"
+                        : "bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800"
                     }`}
                   >
                     <div>
-                      <h3 className="font-medium text-gray-700">
+                      <h3 className="font-medium text-foreground">
                         Monto máximo recomendado
                       </h3>
-                      <p className="text-2xl font-semibold text-indigo-700">
+                      <p className="text-2xl font-semibold text-primary">
                         ${result.maxAmount.toLocaleString("es-CO")}{" "}
-                        <span className="text-sm text-gray-500">COP</span>
+                        <span className="text-sm text-muted-foreground">COP</span>
                       </p>
                     </div>
                     <div>
-                      <h3 className="font-medium text-gray-700">
+                      <h3 className="font-medium text-foreground">
                         Plazo recomendado
                       </h3>
-                      <p className="text-2xl font-semibold text-indigo-700">
+                      <p className="text-2xl font-semibold text-primary">
                         {result.recommendedTerm}{" "}
-                        <span className="text-sm text-gray-500">meses</span>
+                        <span className="text-sm text-muted-foreground">meses</span>
                       </p>
                     </div>
                     {result.decision === "APROBADO_CON_AJUSTE" &&
                       result.adjustedMonthlyPayment > 0 && (
                         <div className="col-span-2">
-                          <h3 className="font-medium text-amber-800 mb-1">
+                          <h3 className="font-medium text-amber-800 dark:text-amber-200 mb-1">
                             Recomendación de ajuste
                           </h3>
-                          <p className="text-sm text-amber-700">
+                          <p className="text-sm text-amber-700 dark:text-amber-300">
                             Con los ajustes recomendados, su cuota mensual sería
                             de:{" "}
                             <strong>
@@ -1268,7 +1273,7 @@ const Scoring = () => {
                       )}
                   </div>
                 )}
-                <div className="pt-4 border-t border-gray-200 text-xs text-gray-500 space-y-1">
+                <div className="pt-4 border-t text-xs text-muted-foreground space-y-1">
                   <p>ID de Evaluación: {result.evaluationId}</p>
                   <p>
                     Fecha: {new Date(result.timestamp).toLocaleString("es-CO")}
@@ -1302,15 +1307,15 @@ const Scoring = () => {
         )}
       </div>
       {/* Footer fijo en una sola línea, contenido a la izquierda y enlaces a la derecha */}
-      <footer className="fixed bottom-0 left-0 w-full bg-white/90 border-t border-gray-200 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-xs text-gray-500">
+      <footer className="fixed bottom-0 left-0 w-full bg-background/90 border-t z-50">
+        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between text-xs text-muted-foreground">
           <div>
             © 2024 CreditScore Pro &nbsp;•&nbsp; Desarrollado por{" "}
             <a
               href="https://www.igdsas.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline hover:text-indigo-700"
+              className="underline hover:text-primary"
             >
               Ingeniería, Gestión y Desarrollo S. A. S.
             </a>
@@ -1318,21 +1323,21 @@ const Scoring = () => {
           <div className="flex flex-wrap gap-2">
             <Link
               to="/privacy"
-              className="underline hover:text-indigo-700"
+              className="underline hover:text-primary"
             >
               Política de Privacidad
             </Link>
             <span>|</span>
             <Link
               to="/terms"
-              className="underline hover:text-indigo-700"
+              className="underline hover:text-primary"
             >
               Términos de Uso
             </Link>
             <span>|</span>
             <a
               href="#"
-              className="underline hover:text-indigo-700"
+              className="underline hover:text-primary"
             >
               Contacto
             </a>
